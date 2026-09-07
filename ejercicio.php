@@ -2,7 +2,7 @@
 
 interface Reportable
 {
-    public function reportarTrabajo();
+    public function reportar_trabajo();
 }
 
 
@@ -34,7 +34,7 @@ abstract class Aprendiz implements Reportable
         return $this->edad;
     }
 
-    public function mostrarInformacion()
+    public function mostrar_informacion()
     {
         echo "Nombre: " . $this->nombre . "\n";
         echo "Ficha: " . $this->ficha . "\n";
@@ -54,7 +54,7 @@ class Backend extends Aprendiz
         $this->lenguaje = $lenguaje;
     }
 
-    public function reportarTrabajo()
+    public function reportar_trabajo()
     {
         return "Desarrolla la parte lógica del sistema usando " . $this->lenguaje;
     }
@@ -72,7 +72,7 @@ class Frontend extends Aprendiz
         $this->herramienta = $herramienta;
     }
 
-    public function reportarTrabajo()
+    public function reportar_trabajo()
     {
         return "Desarrolla la interfaz del sistema usando " . $this->herramienta;
     }
@@ -88,12 +88,12 @@ class Equipo
         $this->integrantes = [];
     }
 
-    public function agregarIntegrante($integrante)
+    public function agregar_integrante($integrante)
     {
         $this->integrantes[] = $integrante;
     }
 
-    public function mostrarIntegrantes()
+    public function mostrar_integrantes()
     {
         echo "\n====================================\n";
         echo "       REPORTE DEL EQUIPO\n";
@@ -103,20 +103,20 @@ class Equipo
 
             echo "\n------------------------------------\n";
 
-            $integrante->mostrarInformacion();
+            $integrante->mostrar_informacion();
 
             echo "Trabajo: ";
-            echo $integrante->reportarTrabajo();
+            echo $integrante->reportar_trabajo();
             echo "\n";
         }
     }
 
-    public function contarIntegrantes()
+    public function contar_integrantes()
     {
         return count($this->integrantes);
     }
 
-    public function filtrarPorFicha($ficha)
+    public function filtrar_por_ficha($ficha)
     {
         return array_filter($this->integrantes, function ($integrante) use ($ficha) {
 
@@ -125,7 +125,7 @@ class Equipo
         });
     }
 
-    public function ordenarPorNombre()
+    public function ordenar_por_nombre()
     {
         $ordenados = $this->integrantes;
 
@@ -142,8 +142,6 @@ class Equipo
     }
 }
 
-
-/* CREAR APRENDICES */
 
 $aprendiz1 = new Backend(
     "Carlos",
@@ -174,44 +172,38 @@ $aprendiz4 = new Frontend(
 );
 
 
-/* CREAR EQUIPO */
-
 $equipo = new Equipo();
 
 
-/* AGREGAR APRENDICES */
-
-$equipo->agregarIntegrante($aprendiz1);
-$equipo->agregarIntegrante($aprendiz2);
-$equipo->agregarIntegrante($aprendiz3);
-$equipo->agregarIntegrante($aprendiz4);
+$equipo->agregar_integrante($aprendiz1);
+$equipo->agregar_integrante($aprendiz2);
+$equipo->agregar_integrante($aprendiz3);
+$equipo->agregar_integrante($aprendiz4);
 
 
-/* MOSTRAR TODOS */
 
-$equipo->mostrarIntegrantes();
+$equipo->mostrar_integrantes();
 
 
-/* CONTAR INTEGRANTES */
 
 echo "\n====================================\n";
 echo "       CANTIDAD DE INTEGRANTES\n";
 echo "====================================\n";
 
 echo "Total de integrantes: ";
-echo $equipo->contarIntegrantes();
+echo $equipo->contar_integrantes();
 echo "\n";
 
 
-/* FILTRAR POR FICHA */
+
 
 echo "\n====================================\n";
 echo "          FILTRAR POR FICHA\n";
 echo "====================================\n";
 
-$fichaBuscada = 2876543;
+$ficha_buscada = 2876543;
 
-$filtrados = $equipo->filtrarPorFicha($fichaBuscada);
+$filtrados = $equipo->filtrar_por_ficha($ficha_buscada);
 
 foreach ($filtrados as $integrante) {
 
@@ -225,7 +217,7 @@ echo "\n====================================\n";
 echo "          ORDENAR POR NOMBRE\n";
 echo "====================================\n";
 
-$ordenados = $equipo->ordenarPorNombre();
+$ordenados = $equipo->ordenar_por_nombre();
 
 foreach ($ordenados as $integrante) {
 
